@@ -16,12 +16,7 @@ class Home extends Component{
         }
     }
 
-    handleClick(key, event){
-        let x = event.clientX;
-        let y = event.clientY;
-        if(x>=140 && x<=250 && y>=420 && y<=480){
-            console.log(event.clientX, event.clientY)
-        }
+    handleClick(key){
         if(key === 1){
             this.setState({
                 classStr: 'goNext'
