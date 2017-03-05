@@ -1,9 +1,15 @@
 
 #home{
-    width: 100%;
-    height: 100%;
     position: relative;
 }
+
+#home.page2{
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    height: 125%;
+}
+
+
 
 #card{
     width: 100%;
@@ -25,23 +31,37 @@
     background: url("../../img/home.png") no-repeat;
     background-size: 100%;
 }
-#card .panelOne>button{
+#card>.panelOne button{
+    width: 1.4rem;
+    height: 0.5rem;
+    margin-left: -0.7rem;
+    left: 50%;
+    top: 3.65rem;
+}
+
+#card .panelTwo{
+    background: url("../../img/page-2.png") no-repeat;
+    background-size: 100%;
+    transform: rotateY( 180deg );
+    height: 125%;
+}
+
+#card>.panelTwo button{
     color: rgba(0, 0, 0, 0);
     background: none;
     border: none;
     position: absolute;
-    width: 0.84rem;
-    height: 0.3rem;
-    margin-left: -0.42rem;
+    width: 1.4rem;
+    height: 0.5rem;
+    margin-left: -0.7rem;
     left: 50%;
-    bottom: 1.75rem;
+    top: 4.65rem;
 }
 
-#card .panelTwo{
-    background: url("../../img/home_second.png") no-repeat;
-    background-size: 100%;
-    transform: rotateY( 180deg );
+#home.page2 .panelOne button{
+    display: none;
 }
+
 
 /*当卡片翻转后，#card需要一个相应的翻转后的样式。*/
 #card.goNext {

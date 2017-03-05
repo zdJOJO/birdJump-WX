@@ -1,0 +1,239 @@
+
+#pay{
+    background: url("../../img/page-7.png") no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+
+#pay .price{
+    position: absolute;
+    width: 1.4rem;
+    left: 50%;
+    top: 1.45rem;
+    margin-left: -0.7rem;
+    padding-top: 0.04rem;
+}
+
+#pay .price>li{
+    float: left;
+    width: 0.48rem;
+    height: 0.17rem;
+    line-height: 0.17rem;
+    color: #f4a21c;
+    font-size: 0.11rem;
+    border: 2px #f4a21c solid;
+    border-radius: 7px;
+    margin: 0 0 0.1rem 0.15rem;
+
+    opacity: 0;
+    /*background: red;*/
+}
+
+#pay .price>li:nth-child(even){
+    margin: 0 0 0.11rem 0.075rem;
+}
+
+
+
+
+/* #want */
+#want{
+    overflow-y: scroll;
+    font-family: 楷体;
+}
+
+#want .content{
+    background: url("../../img/page-6.png") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 130%;
+    position: relative;
+}
+
+#want img{
+    position: absolute;
+    border: none;
+}
+
+#want img.headPic{
+    width: 0.48rem;
+    height: 0.48rem;
+    border-radius: 100%;
+    left: 50%;
+    top: 0.98rem;
+    margin-left: -0.24rem;
+}
+
+#want img.good{
+    width: 1.14rem;
+    height: 1.37rem;
+    position: absolute;
+    top: 1.8rem;
+    left: 50%;
+    margin-left: -0.57rem;
+}
+
+#want .slide{
+    position: absolute;
+    border-radius: 10px;
+    border: 5px #f8b62b solid;
+    width: 1.6rem;
+    height: 0.08rem;
+    margin-left: -0.8rem;
+    top: 3.26rem;
+    left: 50%;
+}
+
+#want div{
+    float: left;
+    height: 100%;
+}
+
+#want .barOne{
+    background: #f8b62b;
+    border-radius: 1px 0 0 1px;
+}
+
+#want .barTwo{
+    background: #fff;
+    border-radius: 0 10px 10px 0;
+}
+
+#want .totalPrice{
+    position: absolute;
+    color: #f8b62b;
+    font-size: 0.1rem;
+    top: 3.42rem;
+    left: 0.8rem;
+}
+
+#want .difference{
+    position: absolute;
+    color: #f8b62b;
+    font-size: 0.1rem;
+    top: 3.42rem;
+    left: 2rem
+}
+
+#want .sponsorship{
+    width: 1.2rem;
+    height: 0.2rem;
+    margin-left: -0.6rem;
+    top: 3.68rem;
+}
+
+#want .collect{
+    width: 1.4rem;
+    height: 0.2rem;
+    margin-left: -0.7rem;
+    top: 4rem;
+}
+
+#want .collect2{
+    width: 1.4rem;
+    height: 0.2rem;
+    margin-left: -0.7rem;
+    top: 5.35rem;
+}
+
+
+#want .hasSponsorship{
+    display: block;
+    color: #fff;
+    font-size: 0.11rem;
+    width: 2rem;
+    position: absolute;
+    bottom: 2.78rem;
+    left: 50%;
+    margin-left: -1rem;
+    text-align: left;
+    padding-left: 10px;
+}
+
+#want ul{
+    width: 1.8rem;
+    min-height: 1rem;
+    position: absolute;
+    margin-left: -1rem;
+    top: 4.63rem;
+    left: 50%;
+    padding: 0 0.1rem;
+}
+
+#want ul li{
+    color: #f8b62b;
+    font-size: 0.11rem;
+    border-bottom: 1px #f8b62b solid;
+    height: 0.25rem;
+    line-height: 0.25rem;
+    padding: 0.02rem 0;
+}
+
+#want ul li>div:first-child{
+    width: 0.25rem;
+    height: 0.25rem;
+    margin-right: 0.1rem;
+}
+
+#want ul li>div:nth-child(2){
+    max-width: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 0.1rem;
+}
+
+#want ul li>div:last-child{
+    float: right;
+    width: 0.5rem;
+    position: relative;
+    font-size: 0.08rem;
+    line-height: 0.1rem;
+    padding-top: 0.04rem;
+}
+#want ul li>div:last-child>span:first-child{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+
+#want ul li img{
+    border: 3px #f8b62b solid;
+    border-radius: 100%;
+    width: 0.2rem;
+    height:  0.2rem;
+    position: inherit;
+}
+
+
+
+/*  #success  */
+#success {
+    background: url("../../img/page-8.png") no-repeat;
+    background-size: 100%;
+}
+
+#success  button{
+    width: 1.6rem;
+    height: 0.3rem;
+    margin-left: -0.8rem;
+    top: 3.2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

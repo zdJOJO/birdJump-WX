@@ -5,7 +5,9 @@
 import { combineReducers } from 'redux'; // 利用combineReducers 合并reducers
 
 import publicReducer from './public'
+import listReducer from './list'
 
 export default combineReducers({
-    publicReducer
+    publicReducer,
+    listReducer
 })

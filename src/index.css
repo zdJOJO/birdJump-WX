@@ -31,26 +31,11 @@ ul, li{
   width: 100%;
 }
 
-
-  /********* 人员管理系统***********/
-#staff{
-  width: 98%;
-  margin: auto;
-}
-
-#head ul{
-  padding: 0;
-}
-
-#head li{
-  width: 33.33%;
-  float: left;
-}
-
-#head li>select{
-  width: 40%;
-}
-
-#head li>input{
-  width: 100%;
+button{
+  background: none;
+  border:  none;
+  outline: none;
+  color: rgba(0, 0, 0, 0);
+  position: absolute;
+  left: 50%;
 }

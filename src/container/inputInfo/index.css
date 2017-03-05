@@ -1,0 +1,75 @@
+
+#inputInfo{
+    background: url("../../img/page-5.png") no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+
+#inputInfo input{
+    border: none;
+    outline: none;
+    width: 0.55rem;
+    position: absolute;
+    left: 1.35rem;
+    border-radius: 10px;
+    height: 0.1rem;
+    padding-left: 0.05rem;
+    color: #646464;
+}
+
+#inputInfo .name{
+    top: 1.24rem;
+}
+
+#inputInfo .age{
+    top: 1.65rem;
+    width: 0.13rem;
+    padding-left: 0.03rem;
+}
+
+#inputInfo .phone{
+    top: 1.85rem;
+}
+
+#inputInfo .address{
+    color: #646464;
+    position: absolute;
+    width: 0.84rem;
+    height: 0.56rem;
+    max-width: 0.85rem;
+    max-height: 0.56rem;
+    left: 1.35rem;
+    top: 2.09rem;
+    outline: none;
+    border-radius: 18px;
+    border: 1px rgba(0, 0, 0, 0) solid;
+    padding: 3px;
+}
+
+#inputInfo button{
+    height: 0.3rem;
+    left: 50%;
+    top: 3.25rem;
+    width: 1.2rem;
+    margin-left: -0.6rem;
+}
+
+#inputInfo i{
+    position: absolute;
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    top: 1.445rem;
+}
+#inputInfo i.male{
+    left: 1.34rem;
+}
+#inputInfo i.female{
+    left: 1.66rem;
+}
+
+#inputInfo i.select{
+    background: #ecaf19;
+}
+

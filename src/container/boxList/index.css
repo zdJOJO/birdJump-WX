@@ -1,0 +1,197 @@
+
+/* #boxList  */
+#boxList{
+    background: url("../../img/page-3.png") no-repeat;
+    background-size: 100%;
+    position: relative;
+    font-family: 楷体;
+}
+
+#boxList ul{
+    position: absolute;
+    left: 0.75rem;
+    top: 1.2rem;
+    padding-top: 0.138rem;
+    width: 1.65rem;
+    height: 2.1rem;
+    overflow-y: scroll;
+}
+
+#boxList ul::-webkit-scrollbar{
+    display: none;
+}
+
+#boxList ul li{
+    border-radius: 10px;
+    margin-bottom: 0.1rem;
+    text-align: left;
+    height: 0.35rem;
+    position: relative;
+}
+
+#boxList ul li>img{
+    width: 0.28rem;
+    height: 0.28rem;
+    border-radius: 10px;
+    border: 3px #f39800 solid;
+    position: absolute;
+    left: 0.18rem;
+    top: 0;
+}
+
+#boxList ul li>.first{
+    writing-mode: tb-rl;
+    color: #6a3900;
+    font-size: 0.12rem;
+    position: absolute;
+    left: 0;
+    top: 0.05rem;
+}
+
+#boxList ul li>.openDate{
+    color: #f39800;
+    font-size: 0.1rem;
+    font-family: 楷体;
+    border: 3px #f39800 solid;
+    border-radius: 15px;
+    padding: 0.06rem 0.14rem;
+    position: absolute;
+    left: 0.6rem;
+}
+
+#boxList ul li>.mask{
+    position: absolute;
+    width: 0.28rem;
+    height: 0.28rem;
+    background: rgba(20, 20, 20, 0.7);
+    z-index: 10;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    left: 0.21rem;
+    top: 0.01rem
+}
+
+
+
+/* #detailList  */
+
+#detailList{
+    background: url("../../img/page-3-1.png") no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+
+#detailList .number{
+    position: absolute;
+    top: 1.16rem;
+    left: 1.8rem;
+    color: #ecaf19;
+    font-size: 0.15rem;
+    font-family: "楷体";
+}
+
+#detailList ul{
+    position: absolute;
+    top: 1.51rem;
+    left: 0.852rem;
+    width: 1.64rem;
+    height: 2.2rem;
+    overflow-y: scroll;
+}
+
+#detailList ul::-webkit-scrollbar{
+    display: none;
+}
+
+#detailList ul li{
+    width: 0.42rem;
+    height: 0.42rem;
+    margin: 0 0.06rem 0.08rem 0;
+    float: left;
+    border: 3px #ecaf19 solid;
+}
+
+#detailList ul li img{
+    width: 100%;
+    height: 100%;
+}
+
+
+#detailList .mask{
+    position: absolute;
+    top: 1.51rem;
+    left: 0.852rem;
+    width: 1.5rem;
+    height: 2.2rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    font-family: 楷体;
+    border-radius: 10px;
+}
+
+
+
+/* #detail */
+#detail{
+    background: url("../../img/page-4.png") no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+
+#detail img{
+    width: 1.14rem;
+    height: 1.37rem;
+    position: absolute;
+    top: 1.09rem;
+    left: 50%;
+    margin-left: -0.57rem;
+}
+
+#detail span{
+    position: absolute;
+    font-size: 0.1rem;
+    font-family: "\6977\4F53";
+    color: #ecaf19;
+    left: 1rem;
+    max-width: 1.5rem;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-align: left;
+
+}
+
+#detail span.price{
+    top: 2.5rem;
+}
+#detail span.goodName{
+    top: 2.63rem;
+}
+
+
+#detail button{
+    width: 1.2rem;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    outline: none;
+    margin-left: -0.6rem;
+    left: 50%;
+    top: 3.3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+

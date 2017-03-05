@@ -3,8 +3,6 @@
  */
 import React,{Component} from 'react';
 
-import Menu from '../../router/menu';
-
 import './index.css'
 
 class Home extends Component{
@@ -12,32 +10,45 @@ class Home extends Component{
         super(props)
         this.state = {
             key: 0,
-            classStr: ''
+            classStr: '',
+            homeClassName: 'panel panel-default'
         }
     }
 
-    handleClick(key){
+    handleClick(key,event){
+        console.log(key)
+        event.preventDefault();
+        this.setState({
+            key: key
+        });
         if(key === 1){
             this.setState({
-                classStr: 'goNext'
+                classStr: 'goNext',
+                homeClassName: 'panel panel-default page2'
             })
         }else if(key === 2){
-            // this.setState({
-            //     classStr: ''
-            // })
+            this.setState({
+                // classStr: '',
+                homeClassName: 'panel panel-default'
+            })
+            location.hash='#/list'
         }
     }
 
     render(){
         return(
-            <div id="home" className="panel panel-default">
+            <div id="home" className={this.state.homeClassName}>
                 <div id="card" className={this.state.classStr}>
                     <div className="panelOne">
                         <button
                             onClick={this.handleClick.bind(this, 1)}
                         >点击进入</button>
                     </div>
-                    <div className="panelTwo"></div>
+                    <div className="panelTwo">
+                        <button
+                            onClick={this.handleClick.bind(this, 2)}
+                        >我要参加</button>
+                    </div>
                 </div>
             </div>
         )
