@@ -2,8 +2,11 @@
  * Created by Administrator on 2017/03/05 0005.
  */
 import React,{Component} from 'react';
+import {connect} from 'react-redux';
 
 import {Toast} from 'react-weui';
+
+import { fetchOrder } from '../../actions/payAciton'
 
 import './index.css'
 
@@ -19,14 +22,17 @@ class Pay extends Component{
     }
 
     handleClick(price){
-
-        this.setState({
-            showLoading: true
-        });
-
-        setTimeout(()=>{
-            location.hash='#/success'
-        },1000)
+        const { fetchOrder } = this.props;
+        fetchOrder({
+            type: 1,
+            data: {
+                userId: this.props.location.query.userId,   //发起人的 userId
+                goodsId: this.props.location.query.goodsId,
+                ipAddress: this.props.location.query.ipAddress,
+                openId: this.props.location.query.openId,
+                price: price
+            }
+        })
 
         if(typeof (price)==='string'){
             console.log('其他金额')
@@ -55,4 +61,13 @@ class Pay extends Component{
     }
 }
 
-export default Pay;
+
+function mapStateToProps(state) {
+    return{
+        
+    }
+}
+
+export default connect(
+    mapStateToProps,{ fetchOrder }
+)(Pay);

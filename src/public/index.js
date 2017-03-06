@@ -2,12 +2,20 @@
  * Created by Administrator on 2017/01/09 0009.
  */
 
-
 export const port = 'http://fund.mahayanamedia.com';
 
 //cookie
 import cookie from 'react-cookie';
 export const token = cookie.load('token');
+
+
+export const GetQueryString =(name)=>{
+    let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    let r = window.location.search.substr(1).match(reg);
+    if(r!=null)
+        return  unescape(r[2]);
+    return null;
+}
 
 
 //通用函数 时间戳转换成 固定格式

@@ -3,8 +3,10 @@
  */
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import cookie from 'react-cookie'
 
 import {fetchList} from '../../actions/listAction'
+import {showError} from '../../actions/publicAction'
 
 import { Dialog } from 'react-weui';
 
@@ -14,31 +16,27 @@ class InputInfo extends Component{
 
     constructor(props){
         super(props);
+        const { showError } = this.props;
         this.state = {
             isSelectMale: false,
             isSelectFemale: false,
             classStrMale: 'male',
             classStrFemale: 'female',
-            sexValue: 0   // 0-未选择  1-男  2-女
-        }
-    }
-
-
-    handleClick(){
-        console.log('提交')
-        const { fetchList, isPostSuccess } = this.props;
-        fetchList({
-            type: 4,
-            data: {
+            sexValue: 0,   // 0-未选择  1-男  2-女
+            data:{
                 name: '',
-                sexValue: '',
-                age: "",
-                phone: '',
+                age: 0,
+                phone: 0,
                 address: ''
+            },
+            style1: {
+                buttons: [
+                    {
+                        label: 'Ok',
+                        onClick: ()=>{showError(false)}
+                    }
+                ]
             }
-        });
-        if(isPostSuccess){
-            location.hash='#/want'
         }
     }
 
@@ -51,8 +49,8 @@ class InputInfo extends Component{
                     sexValue: 1,
 
                     isSelectFemale: false,
-                    classStrFemale: 'female'
-                })
+                    classStrFemale: 'female',
+                });
             }else {
                 this.setState({
                     isSelectMale: false,
@@ -71,7 +69,7 @@ class InputInfo extends Component{
                     sexValue: 2,
 
                     isSelectMale: false,
-                    classStrMale: 'male'
+                    classStrMale: 'male',
                 })
             }else {
                 this.setState({
@@ -86,10 +84,72 @@ class InputInfo extends Component{
         }
     }
 
+    handleChange(type,event){
+        if(type === 1){
+            this.setState({
+                data:{
+                    ...this.state.data,
+                    name: event.target.value
+                }
+            })
+        }else if(type === 2){
+            this.setState({
+                data:{
+                    ...this.state.data,
+                    age: event.target.value
+                }
+            })
+        }else if(type === 3){
+            this.setState({
+                data:{
+                    ...this.state.data,
+                    phone: event.target.value
+                }
+            })
+        }else if(type === 4){
+            this.setState({
+                data:{
+                    ...this.state.data,
+                    address: event.target.value
+                }
+            })
+        }else {
+
+        }
+    }
+
+    handleSubmit(){
+        const { fetchList, showError } = this.props;
+        let data = {
+            userId: cookie.load('userId'),
+            name: this.state.data.name,
+            gender: this.state.sexValue,
+            age: this.state.data.age,
+            phone: this.state.data.phone,
+            address: this.state.data.address
+        }
+        if(!data.name || data.gender===0 ||  !data.age || !data.phone || !data.address){
+            console.log('请正确填写信息');
+            showError(true);
+            return
+        }
+        fetchList({
+            type: 4,
+            data: data
+        });
+    }
 
     render(){
+        const { isShowError } = this.props;
         return(
             <div id="inputInfo" className="panel panel-default">
+
+                <Dialog type="ios"
+                        title='提示'
+                        buttons={this.state.style1.buttons}
+                        show={isShowError}
+                >请正确填写信息</Dialog>
+
                 <i className={this.state.classStrMale}
                    onClick={this.handleSelect.bind(this, 1,!this.state.isSelectMale)}
                 />
@@ -97,11 +157,11 @@ class InputInfo extends Component{
                    onClick={this.handleSelect.bind(this, 2,!this.state.isSelectFemale)}
                 />
 
-                <input type="text" className="name" />
-                <input type="number" className="age"/>
-                <input type="tel" className="phone"/>
-                <textarea className="address"/>
-                <button onClick={this.handleClick.bind(this)}>提交</button>
+                <input type="text" className="name" onChange={this.handleChange.bind(this, 1)}/>
+                <input type="number" className="age" onChange={this.handleChange.bind(this, 2)}/>
+                <input type="tel" className="phone"  onChange={this.handleChange.bind(this, 3)}/>
+                <textarea className="address"  onChange={this.handleChange.bind(this, 4)}/>
+                <button onClick={this.handleSubmit.bind(this)}>提交</button>
             </div>
         )
     }
@@ -109,10 +169,14 @@ class InputInfo extends Component{
 
 function mapStateToProps(state) {
     return{
-        isPostSuccess: state.listReducer.isPostSuccess
+        isPostSuccess: state.listReducer.isPostSuccess,
+
+        isShowError: state.publicReducer.isShowError
     }
 }
 
 export default connect(
-    mapStateToProps, {fetchList}
+    mapStateToProps, {
+        fetchList, showError
+    }
 )(InputInfo);

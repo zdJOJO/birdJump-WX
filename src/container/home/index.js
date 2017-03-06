@@ -2,8 +2,10 @@
  * Created by Administrator on 2017/01/05 0005.
  */
 import React,{Component} from 'react';
-
+import cookie from 'react-cookie';
 import './index.css'
+
+import {GetQueryString} from '../../public/index'
 
 class Home extends Component{
     constructor(props){
@@ -12,6 +14,15 @@ class Home extends Component{
             key: 0,
             classStr: '',
             homeClassName: 'panel panel-default'
+        }
+    }
+
+    componentWillMount(){
+        if(window.location.href.indexOf('?') > 0){
+            let userId =  GetQueryString('userId');
+            if(userId){
+                cookie.save('userId', userId);
+            }
         }
     }
 

@@ -15,6 +15,7 @@
     width: 1.65rem;
     height: 2.1rem;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 #boxList ul::-webkit-scrollbar{
@@ -127,7 +128,7 @@
     color: #fff;
     background: rgba(0, 0, 0, 0.6);
     font-family: 楷体;
-    border-radius: 10px;
+    z-index: 10;
 }
 
 

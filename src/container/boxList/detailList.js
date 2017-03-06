@@ -24,10 +24,10 @@ class DetailList extends Component{
         }
     }
 
-    handleClick(id){
+    handleClick(obj){
         const { setGoodId } = this.props;
-        console.log('您选择的众筹商品是:', id);
-        setGoodId(id);
+        console.log('您选择的众筹商品是:', obj.goodId, obj.goodPrice);
+        setGoodId(obj);
         location.hash = '#/detail'
     }
 
@@ -36,7 +36,7 @@ class DetailList extends Component{
         return(
             <div id="detailList" className="panel panel-default">
                 <span className="number">
-                    {number<9 ? '0'+number : number}
+                    {numberToWord(number)}
                 </span>
                 { status > 1 &&
                     <span className="mask">
@@ -47,7 +47,7 @@ class DetailList extends Component{
                     {
                         goodList.map((good,index)=>{
                            return(
-                               <li key={index}  onClick={this.handleClick.bind(this,good.id)}>
+                               <li key={index}  onClick={this.handleClick.bind(this,{goodId:good.id, goodPrice: good.price})}>
                                   <img role="presentation" src={good.pic}/>
                                </li>
                            )
@@ -59,6 +59,34 @@ class DetailList extends Component{
     }
 }
 
+
+const numberToWord = (num)=>{
+    let numStr = '';
+    switch (num){
+        case 1:
+            return numStr='一';
+        case 2:
+            return numStr='二';
+        case 3:
+            return numStr='三';
+        case 4:
+            return numStr='四';
+        case 5:
+            return numStr='五';
+        case 6:
+            return numStr='六';
+        case 7:
+            return numStr='七';
+        case 8:
+            return numStr='八';
+        case 9:
+            return numStr='九';
+        case 10:
+            return numStr='十';
+        default:
+            return numStr;
+    }
+}
 
 
 

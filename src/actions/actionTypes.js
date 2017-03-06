@@ -12,6 +12,8 @@ export const SHOW_ERROR = 'SHOW_ERROR';
     //点击所买的 id
 export const SET_FOLDERID = 'SET_FOLDERID';
 export const SET_GOODID = 'SET_GOODID';
+    //微信支付请求成功
+export const GET_WX_PARAM_SUCCESS = 'GET_WX_PARAM_SUCCESS';
 
 
 
@@ -23,3 +25,10 @@ export const GET_GOODDETAIL_SEUCCESS = 'GET_GOODDETAIL_SEUCCESS';
 
 // 信息提交
 export const POST_INFO_SUCCESS = 'POST_INFO_SUCCESS';
+export const CREATE_ONE_FUND = 'CREATE_ONE_FUND';
+
+
+
+// 生成预订单
+export const GET_CONDIDETAIL_SUCCESS = 'GET_CONDIDETAIL_SUCCESS';
+export const CREATE_ONE_ORDER_SUCESSS = 'CREATE_ONE_ORDER_SUCESSS';

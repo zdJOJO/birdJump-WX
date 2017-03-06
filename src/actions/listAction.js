@@ -1,12 +1,14 @@
 /**
  * Created by Administrator on 2017/03/05 0005.
  */
+import cookie from 'react-cookie';
 
 import {port} from '../public/index'
 
 import {
     GET_COLLECTIONLIST_SUCCESS, GET_GOODLIST_SUCCESS,
-    GET_GOODDETAIL_SEUCCESS, POST_INFO_SUCCESS
+    GET_GOODDETAIL_SEUCCESS, POST_INFO_SUCCESS,
+    CREATE_ONE_FUND
 } from './actionTypes'
 
 
@@ -40,6 +42,13 @@ const postInfoSuccess = (isPostSuccess)=>{
     return{
         type: POST_INFO_SUCCESS,
         isPostSuccess
+    }
+};
+
+//创建、发起一个众筹成功
+const createOneFundSuccess =()=>{
+    return{
+        type: CREATE_ONE_FUND,
     }
 }
 
@@ -88,7 +97,7 @@ const  getGoodDetail =(obj)=>{
 
 //提交信息 POST
 const postInfo =(obj)=>{
-    let url =  port +　'/fund/user/update?token={token}';
+    let url =  port +　'/fund/user/update';
     let data = obj.data;
     return dispatch =>{
         return fetch( url, {
@@ -98,9 +107,48 @@ const postInfo =(obj)=>{
             },
             body: JSON.stringify(data)
         }).then( res=>{
-            dispatch(postInfoSuccess(true))
+            return res.json()
         }).then( json =>{
+            if(json.code === '202'){
+                console.log(json)
+                cookie.save('openId', json.data.openId);
+                dispatch(postInfoSuccess(true));
+                location.hash='#/want';
+            }
+        }).catch(e =>{
+            console.log(e)
+        })
+    }
+};
 
+
+//发起一个众筹 POST
+const createOneFund =(obj)=>{
+    let url =  port + '/fund/user/fund/create';
+    let data = {
+        userId: obj.userId,
+        goodsId: obj.goodId,
+        goodsPrice: obj.goodPrice
+    };
+
+    return dispatch =>{
+        return fetch( url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then( res=>{
+            return res.json()
+        }).then( json =>{
+            console.log(json.code)
+            if(json.code === '201'){
+                dispatch(createOneFundSuccess());
+                cookie.save('condiId', json.data.id);
+                location.hash = '#/inputInfo';
+            }else if(json.message === '您已参加该商品的众筹'){
+                alert('您已参加该商品的众筹')
+            }
         }).catch(e =>{
             console.log(e)
         })
@@ -115,6 +163,7 @@ const postInfo =(obj)=>{
 *  2 - 获取众筹列表
 *  3 - 获取详情
 *  4 - 提交信息
+*  5 - 发起一个众筹
 * */
 export const fetchList = (obj)=>{
     return dispatch=>{
@@ -127,6 +176,8 @@ export const fetchList = (obj)=>{
                 return dispatch(getGoodDetail(obj));
             case 4:
                 return dispatch(postInfo(obj));
+            case 5:
+                return dispatch(createOneFund(obj));
             default:
                 return false
         }

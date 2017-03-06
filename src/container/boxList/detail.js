@@ -3,6 +3,7 @@
  */
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import cookie from 'react-cookie';
 
 import {fetchList} from '../../actions/listAction'
 
@@ -22,9 +23,15 @@ class Detail extends Component{
         }
     }
 
-    handleClick(){
+    handleClick() {
         console.log('购买');
-        location.hash = '#/inputInfo'
+        const { fetchList,goodId, goodPrice } = this.props;
+        fetchList({
+            type: 5,
+            userId: cookie.load('userId'),
+            goodId: goodId,
+            goodPrice: goodPrice
+        })
     }
 
     render(){
@@ -44,7 +51,8 @@ function mapStateToProps(state) {
     return{
         goodInfo:　state.listReducer.goodInfo,
 
-        goodId: state.publicReducer.goodId
+        goodId: state.publicReducer.goodId,
+        goodPrice: state.publicReducer.goodPrice
     }
 }
 

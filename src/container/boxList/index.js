@@ -7,8 +7,8 @@ import {connect} from 'react-redux';
 import {Button, Toast} from '../../../src/index';
 
 import {timestampFormat} from '../../public/index';
-import {fetchList} from '../../actions/listAction'
-import {setFolderId} from '../../actions/publicAction'
+import {fetchList} from '../../actions/listAction';
+import {setFolderId} from '../../actions/publicAction';
 
 import './index.css'
 
