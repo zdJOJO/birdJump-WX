@@ -156,9 +156,9 @@
 
 #detail img{
     width: 1.14rem;
-    height: 1.37rem;
+    height: 1.64rem;
     position: absolute;
-    top: 1.09rem;
+    top: 1rem;
     left: 50%;
     margin-left: -0.57rem;
 }
@@ -182,10 +182,15 @@
 }
 
 #detail span.price{
-    top: 2.5rem;
+    top: 2.68rem;
 }
 #detail span.goodName{
-    top: 2.63rem;
+    top: 2.84rem;
+    line-height: 0.11rem;
+}
+#detail span.place{
+    top: 3.20rem;
+    line-height: 0.11rem;
 }
 
 
@@ -196,10 +201,16 @@
     outline: none;
     margin-left: -0.6rem;
     left: 50%;
-    top: 3.3rem;
+    top: 3.82rem;
 }
 
 
+#detail .weui-gallery>span{
+    width: 100% !important;
+    left: 50% !important;
+    margin-left: -50% !important;
+    max-width: none;
+}
 
 
 @media screen and (max-width: 320px){

@@ -34,21 +34,19 @@ class Home extends Component{
     }
 
     handleClick(key,event){
-        console.log(key)
         event.preventDefault();
-        this.setState({
-            key: key
-        });
         if(key === 1){
             this.setState({
                 classStr: 'goNext',
-                homeClassName: 'panel panel-default page2'
+                homeClassName: 'panel panel-default'
             })
         }else if(key === 2){
             this.setState({
-                // classStr: '',
-                homeClassName: 'panel panel-default'
+                homeClassName: 'panel panel-default page2',
+                key: 3,
+                classStr: '',
             })
+        }else {
             location.hash='#/list'
         }
     }
@@ -65,8 +63,15 @@ class Home extends Component{
                     <div className="panelTwo">
                         <button
                             onClick={this.handleClick.bind(this, 2)}
-                        >我要参加</button>
+                        >继续</button>
                     </div>
+                    { this.state.key === 3 &&
+                        <div className="panelThree">
+                            <button
+                                onClick={this.handleClick.bind(this, 3)}
+                            >我要参加</button>
+                        </div>
+                    }
                 </div>
             </div>
         )

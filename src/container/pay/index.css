@@ -236,6 +236,7 @@
 #success {
     background: url("../../img/page-8.png") no-repeat;
     background-size: 100%;
+    z-index: 100;
 }
 
 #success  button{

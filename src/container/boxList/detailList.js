@@ -9,9 +9,34 @@ import {fetchList} from '../../actions/listAction'
 import {setFolderId, setGoodId} from '../../actions/publicAction'
 import {wxConfig} from '../../public/wx/wxConfig'
 
+import {Dialog} from 'react-weui'
+
 import './index.css'
 
 class DetailList extends Component{
+
+    constructor(props){
+        super(props)
+        this.state = {
+            status: 0,
+            showIOS1: false,
+            style1: {
+                title: '提示',
+                buttons: [
+                    {
+                        label: '知道了',
+                        onClick: this.hideDialog.bind(this)
+                    }
+                ]
+            }
+        }
+    }
+
+    hideDialog(){
+        this.setState({
+            showIOS1: false,
+        });
+    }
 
     componentWillMount(){
         const { fetchList , setGoodId, collectionList} = this.props;
@@ -35,8 +60,24 @@ class DetailList extends Component{
         })
     }
 
-    handleClick(obj){
+    handleClick(obj,status){
         const { setGoodId,folderId } = this.props;
+
+        if(status === 1){
+            this.setState({
+                status: 1,
+                showIOS1: true
+            });
+            return
+        }
+        if(status === 3){
+            this.setState({
+                status: 3,
+                showIOS1: true
+            });
+            return
+        }
+
         console.log('您选择的众筹商品是:', obj.goodId, obj.goodPrice);
         setGoodId(obj);
         hashHistory.push({
@@ -49,25 +90,34 @@ class DetailList extends Component{
     }
 
     render(){
-        const { goodList, number, status, collectionList } = this.props;
+        const { goodList, number, collectionList } = this.props;
         return(
             <div id="detailList" className="panel panel-default">
+
+                <Dialog type="ios" title={this.state.style1.title}
+                        buttons={this.state.style1.buttons}
+                        show={this.state.showIOS1}
+                >
+                    { this.state.status === 1 &&
+                        <span>还未开放</span>
+                    }
+                    { this.state.status === 3 &&
+                        <span>已结束</span>
+                    }
+                </Dialog>
+
+
                 { collectionList.length > 0 &&
                     <img className="headPic" role="presentation" src={collectionList[number-1].pic} />
                 }
                 <span className="number">
                     {numberToWord(number)}
                 </span>
-                { status > 1 &&
-                    <span className="mask">
-                        { status === 2 ? '还未开放' : '已结束' }
-                    </span>
-                }
                 <ul>
                     {
                         goodList.map((good,index)=>{
                            return(
-                               <li key={index}  onClick={this.handleClick.bind(this,{goodId:good.id, goodPrice: good.price})}>
+                               <li key={index}  onClick={this.handleClick.bind(this,{goodId:good.id, goodPrice: good.price}, good.status)}>
                                   <img role="presentation" src={good.pic}/>
                                </li>
                            )
@@ -118,7 +168,6 @@ function mapStateToProps(state) {
 
         folderId: state.publicReducer.folderId,
         number: state.publicReducer.number,
-        status: state.publicReducer.status
     }
 }
 

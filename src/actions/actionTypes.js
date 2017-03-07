@@ -9,6 +9,7 @@ export const FALL_FETCH = 'FALL_FETCH';
     //提示
 export const SHOW_SUCCESS = 'SHOW_SUCCESS';
 export const SHOW_ERROR = 'SHOW_ERROR';
+export const SHOW_DONE  = 'SHOW_DONE';
     //点击所买的 id
 export const SET_FOLDERID = 'SET_FOLDERID';
 export const SET_GOODID = 'SET_GOODID';

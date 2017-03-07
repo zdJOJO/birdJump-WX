@@ -7,39 +7,61 @@ import cookie from 'react-cookie';
 import { hashHistory } from 'react-router';
 
 import { fetchOrder } from '../../actions/payAciton'
+import { showError,showDone } from '../../actions/publicAction'
 import {GetQueryString, timeAgoTransForm } from '../../public/index'
-import {wxConfig} from '../../public/wx/wxConfig'
+
+import {Dialog, Popup} from 'react-weui'
 
 import './index.css'
 import done from '../../img/done.png'
 
 class WantToCollect extends Component{
 
+    constructor(props){
+        super(props)
+        const {showError} = this.props
+        this.state = {
+            showIOS1: false,
+            style1: {
+                title: '提示',
+                buttons: [
+                    {
+                        label: '知道了',
+                        onClick: ()=>{showError(false)}
+                    }
+                ]
+            }
+        }
+    }
 
     componentWillMount(){
         const { fetchOrder } = this.props;
-        if(window.location.search.indexOf('isShare') > 0 ){
+
+        if(window.location.search.indexOf('isShare') > 0 ){    //分享获取详情
             let openId = GetQueryString('openId');
             let condiId = GetQueryString('condiId');
-            cookie.load('openId');
+            let selfUserId = GetQueryString('userId');
+            cookie.save('openId', openId);
+            cookie.save('userId', selfUserId);
             fetchOrder({
                 type: 2,
                 condiId: condiId
             })
+        }else if(this.props.location.query.isLook==='1'){
+            // 获取condiId
+            fetchOrder({
+                type: 3,
+                userId: cookie.load('userId'),
+                goodsId:  this.props.location.query.goodId
+            })
         }else {
+            // 自己form表单提交之后， 获取 condiId 获取详情
             fetchOrder({
                 type: 2,
                 condiId: cookie.load('condiId')
             })
         }
 
-        //微信 分享
-        wxConfig({
-            typeStr: 'share',
-            type: 2,
-            url: location.href.split('#')[0],
-            condiId: cookie.load('condiId') || GetQueryString('condiId')
-        })
     }
 
 
@@ -62,7 +84,7 @@ class WantToCollect extends Component{
     }
 
     render(){
-        const { condiDetail } = this.props;
+        const { condiDetail, isShowError, errorStr, isShowDone,showDone } = this.props;
         let width = condiDetail.fundPrice/condiDetail.goodsPrice*1.6+'rem';
         let differenceWith = (1-condiDetail.fundPrice/condiDetail.goodsPrice)*1.6+'rem';
         if(1-condiDetail.fundPrice/condiDetail.goodsPrice <= 0){
@@ -71,6 +93,22 @@ class WantToCollect extends Component{
         }
         return(
             <div id="want" className="panel panel-default">
+
+                <Dialog type="ios" title={this.state.style1.title}
+                        buttons={this.state.style1.buttons}
+                        show={isShowError}
+                >
+                    {errorStr}
+                </Dialog>
+
+
+                { isShowDone &&
+                    <div id="success" className="panel panel-default">
+                        <button onClick={()=>{showDone(false)}}>我的认购收藏</button>
+                    </div>
+                }
+
+
                 { condiDetail.goodsModel &&
                     <div className="content">
                         <img className="headPic" role="presentation" src={condiDetail.headPic} />
@@ -86,7 +124,7 @@ class WantToCollect extends Component{
                         <span className="difference">
                             {
                                 (condiDetail.goodsPrice-condiDetail.fundPrice<=0) ? '已完成'
-                                    : '还差'+(condiDetail.goodsPrice-condiDetail.fundPrice)+'元'
+                                    : '还差'+(condiDetail.goodsPrice-condiDetail.fundPrice).toFixed(2)+'元'
                             }
                         </span>
                         <span className="hasSponsorship">已有{condiDetail.userFundModels.length}位好友为TA赞助</span>
@@ -125,11 +163,17 @@ class WantToCollect extends Component{
 
 function mapStateToProps(state) {
     return{
-        condiDetail: state.publicReducer.condiDetail
+        condiDetail: state.publicReducer.condiDetail,
+
+        isShowDone: state.publicReducer.isShowDone,
+        isShowError: state.publicReducer.isShowError,
+        errorStr: state.publicReducer.errorStr,
+
+        goodId: state.publicReducer.goodId
     }
 }
 
 
 export default connect(
-    mapStateToProps, {fetchOrder}
+    mapStateToProps, {fetchOrder, showError, showDone}
 )(WantToCollect);

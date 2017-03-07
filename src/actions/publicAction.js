@@ -9,15 +9,25 @@ import { wxConfig } from '../public/wx/wxConfig';
 import {
     BEGIN_FETCH, FALL_FETCH, SHOW_SUCCESS, SHOW_ERROR,
     SET_FOLDERID, SET_GOODID,
-    GET_WX_PARAM_SUCCESS
+    GET_WX_PARAM_SUCCESS, SHOW_DONE
 } from './actionTypes'
 
 
+// 显示  众筹成功 
+export const showDone = (isShowDone)=>{
+    return{
+        type: SHOW_DONE,
+        isShowDone
+    }
+}
+
+
 // 显示 错误提示
-export const showError = (isShowError)=>{
+export const showError = (isShowError, _errorStr)=>{
     return{
         type: SHOW_ERROR,
-        isShowError
+        isShowError,
+        _errorStr
     }
 }
 

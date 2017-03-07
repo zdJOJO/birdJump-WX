@@ -93,7 +93,8 @@ export const wxConfig = (wxParamObj)=>{
                             paySign: wxParamObj.paySign, // 支付签名
                             success: function (res) {
                                 // 支付成功后的回调函数
-                                location.hash='#/success'
+                                // location.hash='#/want'
+                                history.back(-1)
                             }
                         });
                 }

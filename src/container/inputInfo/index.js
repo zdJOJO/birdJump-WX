@@ -145,7 +145,8 @@ class InputInfo extends Component{
         }
         fetchList({
             type: 4,
-            data: data
+            data: data,
+            goodId:  this.props.location.query.goodId
         });
     }
 

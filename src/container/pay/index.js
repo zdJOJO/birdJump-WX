@@ -26,14 +26,15 @@ class Pay extends Component{
                 buttons: [
                     {
                         type: 'default',
-                        label: 'Cancel',
+                        label: '取消',
                         onClick: this.hideDialog.bind(this)
                     },
                     {
                         type: 'primary',
-                        label: 'Ok',
+                        label: '支付',
                         onClick: ()=>{
-                            if(!this.state.price) return
+                            if(!this.state.price) 
+                                return
                             fetchOrder({
                                 type: 1,
                                 data: {
@@ -81,6 +82,7 @@ class Pay extends Component{
             })
         }else {
             console.log('所选金额：', price)
+            alert('所选金额：' + price)
             fetchOrder({
                 type: 1,
                 data: {

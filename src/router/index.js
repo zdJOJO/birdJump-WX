@@ -9,7 +9,6 @@ import Detail from '../container/boxList/detail'
 import InputInfo from '../container/inputInfo'
 import WantToCollect from '../container/pay/want'
 import Pay from '../container/pay'
-import Success from '../container/pay/success'
 
 
 export const routeConfig = [
@@ -24,8 +23,7 @@ export const routeConfig = [
             { path: 'detail', component: Detail },
             { path: 'inputInfo', component: InputInfo },
             { path: 'want', component: WantToCollect },
-            { path: 'pay', component: Pay },
-            { path: 'success', component: Success}
+            { path: 'pay', component: Pay }
         ]
     }
 ]

@@ -7,12 +7,16 @@ import {
     BEGIN_FETCH, FALL_FETCH, SHOW_SUCCESS, SHOW_ERROR,
     SET_FOLDERID, SET_GOODID,
     GET_WX_PARAM_SUCCESS,
-    GET_CONDIDETAIL_SUCCESS
+    GET_CONDIDETAIL_SUCCESS,
+    SHOW_DONE
 } from '../actions/actionTypes';
 
 const initalState = {
     isShowSuccess: false,   // 成功 true-显示
     isShowError: false,   //  错误  true-显示
+    isShowDone: false, //是否已经众筹成功
+    
+    errorStr: '',
 
     folderId: '',   //所选的 集合 id
     goodId: '',  //所选的 众筹商品 id
@@ -53,7 +57,8 @@ export default function publicReducer(state=initalState, action) {
         case SHOW_ERROR:
             return{
                 ...state,
-                isShowError: action.isShowError
+                isShowError: action.isShowError,
+                errorStr: action._errorStr || ''
             };
         case SET_FOLDERID:
             return{
@@ -84,7 +89,13 @@ export default function publicReducer(state=initalState, action) {
             return{
                 ...state,
                 condiDetail: action.info
+            };
+        case SHOW_DONE:{
+            return{
+                ...state,
+                isShowDone: action.isShowDone
             }
+        }
         default:
             return state
     }

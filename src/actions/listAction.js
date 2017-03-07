@@ -2,7 +2,6 @@
  * Created by Administrator on 2017/03/05 0005.
  */
 import cookie from 'react-cookie';
-
 import {port} from '../public/index'
 
 import {
@@ -10,6 +9,8 @@ import {
     GET_GOODDETAIL_SEUCCESS, POST_INFO_SUCCESS,
     CREATE_ONE_FUND
 } from './actionTypes'
+
+import {showError} from './publicAction'
 
 
 
@@ -113,7 +114,10 @@ const postInfo =(obj)=>{
                 console.log(json)
                 cookie.save('openId', json.data.openId);
                 dispatch(postInfoSuccess(true));
-                location.hash='#/want';
+                //location.hash='#/want';
+                window.location.href = 'http://fund.mahayanamedia.com/birdJump/#/want?isLook=1&goodId='+obj.goodId;
+            }else {
+                alert(json)
             }
         }).catch(e =>{
             console.log(e)
@@ -145,9 +149,9 @@ const createOneFund =(obj)=>{
             if(json.code === '201'){
                 dispatch(createOneFundSuccess());
                 cookie.save('condiId', json.data.id);
-                location.hash = '#/inputInfo';
-            }else if(json.message === '您已参加该商品的众筹'){
-                alert('您已参加该商品的众筹')
+                location.hash='#/inputInfo?goodId='+obj.goodId;
+            }else{
+                dispatch(showError(true, json.message))
             }
         }).catch(e =>{
             console.log(e)
