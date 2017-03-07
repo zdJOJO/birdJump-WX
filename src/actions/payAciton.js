@@ -10,8 +10,6 @@ import {
     CREATE_ONE_ORDER_SUCESSS, GET_CONDIDETAIL_SUCCESS
 } from './actionTypes'
 
-
-
 // 生成订单成功
 const createOrderSuccess =()=>{
     return{
@@ -58,11 +56,11 @@ const createOrder =(obj)=>{
                     nonceStr: nonceStr,
                     package: packageStr,
                     timeStamp: timeStamp,
-                    paySign: paySign
+                    paySign: paySign,
+                    url: location.href.split('#')[0]
                 };
                 let wxParamObjOne = data;
                 wxParamObjOne.typeStr = 'wxPay';
-
                 dispatch(createOrderSuccess());
                 if(result){
                     wxConfig(wxParamObjOne);

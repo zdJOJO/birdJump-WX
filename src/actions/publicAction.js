@@ -3,7 +3,6 @@
  */
 
 import {hex_md5} from '../public/md5'
-import {port} from '../public/index'
 import { wxConfig } from '../public/wx/wxConfig';
 
 
@@ -77,7 +76,8 @@ const requestWxParam =(obj)=>{
                         nonceStr: nonceStr,
                         package: packageStr,
                         timeStamp: timeStamp,
-                        paySign: paySign
+                        paySign: paySign,
+                        url: location.href.split('#')[0]
                     };
                     dispatch(requestWxParamSuccess(data));
                     let wxParamObjOne = data;

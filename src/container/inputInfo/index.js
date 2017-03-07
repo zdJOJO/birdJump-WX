@@ -7,6 +7,7 @@ import cookie from 'react-cookie'
 
 import {fetchList} from '../../actions/listAction'
 import {showError} from '../../actions/publicAction'
+import {wxConfig} from '../../public/wx/wxConfig'
 
 import { Dialog } from 'react-weui';
 
@@ -38,6 +39,15 @@ class InputInfo extends Component{
                 ]
             }
         }
+    }
+
+    componentWillMount(){
+        //微信 分享
+        wxConfig({
+            typeStr: 'share',
+            type: 1,
+            url: location.href.split('#')[0]
+        })
     }
 
     handleSelect(type, isSelect){

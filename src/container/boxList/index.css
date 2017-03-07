@@ -41,12 +41,14 @@
 }
 
 #boxList ul li>.first{
-    writing-mode: tb-rl;
     color: #6a3900;
     font-size: 0.12rem;
     position: absolute;
     left: 0;
     top: 0.05rem;
+    display: block;
+    width: 0.12rem;
+    line-height: 0.124rem;
 }
 
 #boxList ul li>.openDate{
@@ -83,22 +85,34 @@
     position: relative;
 }
 
+#detailList .headPic{
+    position: absolute;
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 100%;
+    border: 2px #ecaf19 solid;
+    top: 1.3rem;
+    left: 50%;
+    margin-left: -0.18rem;
+}
+
 #detailList .number{
     position: absolute;
-    top: 1.16rem;
-    left: 1.8rem;
+    top: 1.08rem;
+    left: 1.52rem;
     color: #ecaf19;
     font-size: 0.15rem;
-    font-family: "楷体";
+    font-family: "\6977\4F53";
 }
 
 #detailList ul{
     position: absolute;
-    top: 1.51rem;
+    top: 1.9rem;
     left: 0.852rem;
     width: 1.64rem;
     height: 2.2rem;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 #detailList ul::-webkit-scrollbar{
@@ -121,7 +135,7 @@
 
 #detailList .mask{
     position: absolute;
-    top: 1.51rem;
+    top: 1.9rem;
     left: 0.852rem;
     width: 1.5rem;
     height: 2.2rem;
@@ -188,7 +202,12 @@
 
 
 
+@media screen and (max-width: 320px){
+    #boxList ul li>.openDate{
+        padding: 0.04rem 0.1rem;
 
+    }
+}
 
 
 

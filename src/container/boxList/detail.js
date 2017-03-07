@@ -6,30 +6,34 @@ import {connect} from 'react-redux';
 import cookie from 'react-cookie';
 
 import {fetchList} from '../../actions/listAction'
+import {wxConfig} from '../../public/wx/wxConfig'
 
 import './index.css'
 
 class Detail extends Component{
 
     componentWillMount(){
-        const { fetchList, goodId } = this.props;
-        if(!goodId) {
-            history.back(-1);
-        }else {
-            fetchList({
-                type: 3,
-                id: goodId
-            });
-        }
+        const { fetchList } = this.props;
+        fetchList({
+            type: 3,
+            id: this.props.location.query.goodId
+        });
+
+        //微信 分享
+        wxConfig({
+            typeStr: 'share',
+            type: 1,
+            url: location.href.split('#')[0]
+        })
     }
 
     handleClick() {
         console.log('购买');
-        const { fetchList,goodId, goodPrice } = this.props;
+        const { fetchList, goodPrice } = this.props;
         fetchList({
             type: 5,
             userId: cookie.load('userId'),
-            goodId: goodId,
+            goodId: this.props.location.query.goodId,
             goodPrice: goodPrice
         })
     }
@@ -51,7 +55,7 @@ function mapStateToProps(state) {
     return{
         goodInfo:　state.listReducer.goodInfo,
 
-        goodId: state.publicReducer.goodId,
+       // goodId: state.publicReducer.goodId,
         goodPrice: state.publicReducer.goodPrice
     }
 }

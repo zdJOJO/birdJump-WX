@@ -3,6 +3,7 @@
  */
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import { hashHistory } from 'react-router';
 
 import {Button, Toast} from '../../../src/index';
 
@@ -11,6 +12,7 @@ import {fetchList} from '../../actions/listAction';
 import {setFolderId} from '../../actions/publicAction';
 
 import './index.css'
+import {wxConfig} from '../../public/wx/wxConfig'
 
 class BoxList extends Component{
 
@@ -20,13 +22,25 @@ class BoxList extends Component{
         fetchList({
             type: 1    
         })
+
+        //微信 分享
+        wxConfig({
+            typeStr: 'share',
+            type: 1,
+            url: location.href.split('#')[0]
+        })
     }
 
     handleClick(id, num, status){
         const { setFolderId } = this.props;
         console.log('您选择的是:', id);
         setFolderId(id, num, status);
-        location.hash='#detailList'
+        hashHistory.push({
+            pathname: '/detailList',
+            query: {
+                folderId: id
+            }
+        })
     }
 
     render(){

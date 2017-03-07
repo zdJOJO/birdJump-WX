@@ -7,23 +7,14 @@ import cookie from 'react-cookie';
 import { hashHistory } from 'react-router';
 
 import { fetchOrder } from '../../actions/payAciton'
-import {GetQueryString } from '../../public/index'
+import {GetQueryString, timeAgoTransForm } from '../../public/index'
 import {wxConfig} from '../../public/wx/wxConfig'
 
 import './index.css'
+import done from '../../img/done.png'
 
 class WantToCollect extends Component{
 
-    constructor(props){
-        super(props);
-        const { condiDetail } = this.props;
-        this.state = {
-            totalPrice: condiDetail.goodsPrice,
-            differencePrice: condiDetail.goodsPrice-condiDetail.fundPrice,
-            width: condiDetail.fundPrice/condiDetail.goodsPrice*1.6+'rem',
-            differenceWith: (1-condiDetail.fundPrice/condiDetail.goodsPrice)*1.6+'rem'
-        }
-    }
 
     componentWillMount(){
         const { fetchOrder } = this.props;
@@ -45,44 +36,59 @@ class WantToCollect extends Component{
         //微信 分享
         wxConfig({
             typeStr: 'share',
-            type: 2,   
-            condiId: cookie.load('condiId')
+            type: 2,
+            url: location.href.split('#')[0],
+            condiId: cookie.load('condiId') || GetQueryString('condiId')
         })
-        
     }
 
 
     handleClick(type,obj){
         if(type===1){
+            if(obj.diffrencePrice <=0){
+                return
+            }
             //我想给他赞助
-            console.log('我想给他赞助')
+            console.log('我想给他赞助');
             hashHistory.push({
                 pathname: '/pay',
                 query: obj
             });
         }else {
             //我也想收藏一套
-            console.log('我也想收藏一套')
+            console.log('我也想收藏一套');
             location.hash='#/list'
         }
     }
 
     render(){
         const { condiDetail } = this.props;
-        const width = condiDetail.fundPrice/condiDetail.goodsPrice*1.6+'rem';
-        const differenceWith = (1-condiDetail.fundPrice/condiDetail.goodsPrice)*1.6+'rem';
+        let width = condiDetail.fundPrice/condiDetail.goodsPrice*1.6+'rem';
+        let differenceWith = (1-condiDetail.fundPrice/condiDetail.goodsPrice)*1.6+'rem';
+        if(1-condiDetail.fundPrice/condiDetail.goodsPrice <= 0){
+            width = '1.6rem';
+            differenceWith = 0 + 'rem';
+        }
         return(
             <div id="want" className="panel panel-default">
                 { condiDetail.goodsModel &&
                     <div className="content">
                         <img className="headPic" role="presentation" src={condiDetail.headPic} />
                         <img className="good" role="presentation" src={condiDetail.goodsModel.pic} />
+                        { condiDetail.goodsPrice-condiDetail.fundPrice<=0 &&
+                            <img className="success" role="presentation" src={done} />
+                        }
                         <div className="slide">
                             <div className="barOne" style={{ width: width}}></div>
                             <div className="barTwo" style={{ width: differenceWith}}></div>
                         </div>
                         <span className="totalPrice">总需{condiDetail.goodsPrice}元</span>
-                        <span className="difference">还差{condiDetail.goodsPrice-condiDetail.fundPrice}元</span>
+                        <span className="difference">
+                            {
+                                (condiDetail.goodsPrice-condiDetail.fundPrice<=0) ? '已完成'
+                                    : '还差'+(condiDetail.goodsPrice-condiDetail.fundPrice)+'元'
+                            }
+                        </span>
                         <span className="hasSponsorship">已有{condiDetail.userFundModels.length}位好友为TA赞助</span>
                         <ul>
                             {
@@ -92,8 +98,8 @@ class WantToCollect extends Component{
                                             <div><img role="presentation" src={friend.userModel.headPic} /></div>
                                             <div>{friend.userModel.userName}</div>
                                             <div>
-                                                <span>赞助{friend.price}元</span>
-                                                <span>{friend.updateTime}分钟前</span>
+                                                <span>赞助{friend.price}元</span><br/>
+                                                <span>{timeAgoTransForm(friend.updateTime)}</span>
                                             </div>
                                         </li>
                                     )
@@ -104,8 +110,9 @@ class WantToCollect extends Component{
                         <button className="sponsorship" onClick={this.handleClick.bind(this,1,{
                              userId: condiDetail.userId,   //发起人的 userId
                              goodsId: condiDetail.goodsId,
-                             ipAddress: '220.184.148.248',
-                             openId: cookie.load('openId')
+                             ipAddress: window.returnCitySN.cip,
+                             openId: cookie.load('openId'),
+                             diffrencePrice: condiDetail.goodsPrice-condiDetail.fundPrice
                         })}>我想给他赞助</button>
                         <button className="collect" onClick={this.handleClick.bind(this,2)}>我也想收藏一套</button>
                         <button className="collect2" onClick={this.handleClick.bind(this,2)}>我也想收藏一套</button>

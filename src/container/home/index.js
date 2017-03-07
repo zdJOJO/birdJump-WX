@@ -4,7 +4,7 @@
 import React,{Component} from 'react';
 import cookie from 'react-cookie';
 import './index.css'
-
+import {wxConfig} from '../../public/wx/wxConfig'
 import {GetQueryString} from '../../public/index'
 
 class Home extends Component{
@@ -24,6 +24,13 @@ class Home extends Component{
                 cookie.save('userId', userId);
             }
         }
+
+        //微信 分享
+        wxConfig({
+            typeStr: 'share',
+            type: 1,
+            url: location.href.split('#')[0]
+        })
     }
 
     handleClick(key,event){

@@ -39,3 +39,22 @@ export const timestampFormat = (timestamp,type)=> {
         return (m+'月'+d+'日开箱');
     }
 }
+
+
+//通用函数 多长时间之前
+export const timeAgoTransForm = (time) =>{
+    let preTime = parseInt(new Date().getTime()/1000 )- time;
+    if(preTime<60){
+        return parseInt(preTime,10)+"秒前";
+    }else if((preTime/60)<60){
+        return parseInt(preTime/60,10)+"分钟前";
+    }else if((preTime/3600)<24){
+        return parseInt(preTime/3600,10)+"小时前";
+    }else if((preTime/3600/24)<30){
+        return parseInt(preTime/3600/24,10)+"天前";
+    }else if((preTime/3600/24/30)<12){
+        return parseInt(preTime/3600/24/30,10)+"月前";
+    }else{
+        return parseInt(preTime/3600/24/365,10)+"年前";
+    }
+}

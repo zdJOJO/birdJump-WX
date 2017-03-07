@@ -19,35 +19,20 @@ const randomString = len => {
 
 
 export const wxConfig = (wxParamObj)=>{
-    let shareUrl = wxParamObj.type===1 ? 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx41548d828575252d&redirect_uri=http%3a%2f%2ffund.mahayanamedia.com/fund/weixin/' +
-    'authorize&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
-        : 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx41548d828575252d&redirect_uri=http%3a%2f%2ffund.mahayanamedia.com/fund/weixin/' +
-    'authorizev1&response_type=code&scope=snsapi_userinfo&state='+wxParamObj.condiId+'#wechat_redirect';
-
     fetch( port + '/fund/weixin/token/get')
         .then( res=>{
             return res.json()
         })
         .then( result =>{
-            let urlStr = shareUrl;
+            let urlStr = wxParamObj.url;
             let nonceStr = randomString(16);
             let timestamp =  String( parseInt((new Date().getTime() / 1000)) );
             let jsapi_ticket = result.wxticket;
             let string1 = 'jsapi_ticket=' + jsapi_ticket + '&noncestr=' + nonceStr + '&timestamp=' + timestamp + '&url=' + urlStr;
             let signature = hex_sha1(string1);
-
-            console.log(88888888888888)
-            console.log(urlStr)
-            console.log(nonceStr)
-            console.log(timestamp)
-            console.log(jsapi_ticket)
-            console.log(string1)
-            console.log(signature)
-
-
-
+            
             window.wx.config({
-                debug: true,
+                debug: false,
                 appId: 'wx41548d828575252d',
                 timestamp: timestamp,
                 nonceStr: nonceStr,
@@ -63,13 +48,17 @@ export const wxConfig = (wxParamObj)=>{
 
 
             window.wx.ready(function () {
+                let shareUrl = wxParamObj.type===1 ? 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx41548d828575252d&redirect_uri=http%3a%2f%2ffund.mahayanamedia.com/fund/weixin/' +
+                'authorize&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+                    : 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx41548d828575252d&redirect_uri=http%3a%2f%2ffund.mahayanamedia.com/fund/weixin/' +
+                'authorizev1&response_type=code&scope=snsapi_userinfo&state='+wxParamObj.condiId+'#wechat_redirect';
                 switch (wxParamObj.typeStr){
                     case 'share' :
                         // wxParamObj.type :  1-首页  2-详情
                         window.wx.onMenuShareTimeline({
                             title: '铭记过往 珍藏记忆 传递爱心', // 分享标题
                             link: shareUrl, // 分享链接
-                            imgUrl: '', // 分享图标
+                            imgUrl: 'http://cfund.oss-cn-hangzhou.aliyuncs.com/f0a44062b190c555a38bc805d5144982.png', // 分享图标
                             success: function () {
                                 // 用户确认分享后执行的回调函数
                             },
@@ -80,9 +69,9 @@ export const wxConfig = (wxParamObj)=>{
 
                         window.wx.onMenuShareAppMessage({
                             title: '铭记过往 珍藏记忆 传递爱心', // 分享标题
-                            desc: '这是一个众筹', // 分享描述
+                            desc: '【雀跃希望】 电视剧戏服爱心接力义卖', // 分享描述
                             link: shareUrl, // 分享链接
-                            imgUrl: '', // 分享图标
+                            imgUrl: 'http://cfund.oss-cn-hangzhou.aliyuncs.com/f0a44062b190c555a38bc805d5144982.png', // 分享图标
                             type: '', // 分享类型,music、video或link，不填默认为link
                             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                             success: function () {

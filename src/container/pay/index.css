@@ -34,6 +34,10 @@
 }
 
 
+#pay .weui-dialog__bd{
+    padding: 0 1.6em 0;
+}
+
 
 
 /* #want */
@@ -73,6 +77,21 @@
     margin-left: -0.57rem;
 }
 
+#want img.success{
+    position: absolute;
+    border: none;
+    width: 0.8rem;
+    top: 2.7rem;
+    transform:rotate(-30deg);
+    /*-ms-transform:rotate(7deg); 	!* IE 9 *!*/
+    /*-moz-transform:rotate(7deg); 	!* Firefox *!*/
+    /*-webkit-transform:rotate(7deg); !* Safari 和 Chrome *!*/
+    /*-o-transform:rotate(7deg);*/
+}
+
+
+
+
 #want .slide{
     position: absolute;
     border-radius: 10px;
@@ -80,7 +99,7 @@
     width: 1.6rem;
     height: 0.08rem;
     margin-left: -0.8rem;
-    top: 3.26rem;
+    top: 3.6rem;
     left: 50%;
 }
 
@@ -103,7 +122,7 @@
     position: absolute;
     color: #f8b62b;
     font-size: 0.1rem;
-    top: 3.42rem;
+    top: 3.76rem;
     left: 0.8rem;
 }
 
@@ -111,7 +130,7 @@
     position: absolute;
     color: #f8b62b;
     font-size: 0.1rem;
-    top: 3.42rem;
+    top: 3.76rem;
     left: 2rem
 }
 
@@ -119,14 +138,14 @@
     width: 1.2rem;
     height: 0.2rem;
     margin-left: -0.6rem;
-    top: 3.68rem;
+    top: 4.1rem;
 }
 
 #want .collect{
     width: 1.4rem;
     height: 0.2rem;
     margin-left: -0.7rem;
-    top: 4rem;
+    top: 4.42rem;
 }
 
 #want .collect2{
@@ -143,7 +162,7 @@
     font-size: 0.11rem;
     width: 2rem;
     position: absolute;
-    bottom: 2.78rem;
+    top: 4.85rem;
     left: 50%;
     margin-left: -1rem;
     text-align: left;
@@ -152,12 +171,14 @@
 
 #want ul{
     width: 1.8rem;
-    min-height: 1rem;
+    height: 0.75rem;
     position: absolute;
     margin-left: -1rem;
-    top: 4.63rem;
+    top: 5.06rem;
     left: 50%;
     padding: 0 0.1rem;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 #want ul li{

@@ -4,8 +4,18 @@
 import React,{Component} from 'react';
 
 import './index.css'
+import {wxConfig} from '../../public/wx/wxConfig'
 
 class Success extends Component{
+
+    componentWillMount(){
+        //微信 分享
+        wxConfig({
+            typeStr: 'share',
+            type: 1,
+            url: location.href.split('#')[0]
+        })
+    }
 
     handleClick(){
         console.log(11111111)

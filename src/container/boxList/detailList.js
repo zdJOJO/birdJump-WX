@@ -3,38 +3,58 @@
  */
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import { hashHistory } from 'react-router';
 
 import {fetchList} from '../../actions/listAction'
-import {setGoodId} from '../../actions/publicAction'
+import {setFolderId, setGoodId} from '../../actions/publicAction'
+import {wxConfig} from '../../public/wx/wxConfig'
 
 import './index.css'
 
 class DetailList extends Component{
 
     componentWillMount(){
-        const { fetchList, folderId, setGoodId } = this.props;
-        if(!folderId) {
+        const { fetchList , setGoodId, collectionList} = this.props;
+
+        if(collectionList.length === 0){
             history.back(-1);
         }else {
             fetchList({
                 type: 2,
-                id: folderId
+                id: this.props.location.query.folderId
             });
+
             setGoodId('')
         }
+
+        //微信 分享
+        wxConfig({
+            typeStr: 'share',
+            type: 1,
+            url: location.href.split('#')[0]
+        })
     }
 
     handleClick(obj){
-        const { setGoodId } = this.props;
+        const { setGoodId,folderId } = this.props;
         console.log('您选择的众筹商品是:', obj.goodId, obj.goodPrice);
         setGoodId(obj);
-        location.hash = '#/detail'
+        hashHistory.push({
+            pathname: '/detail',
+            query: {
+                folderId: folderId,
+                goodId: obj.goodId
+            }
+        })
     }
 
     render(){
-        const { goodList, number, status } = this.props;
+        const { goodList, number, status, collectionList } = this.props;
         return(
             <div id="detailList" className="panel panel-default">
+                { collectionList.length > 0 &&
+                    <img className="headPic" role="presentation" src={collectionList[number-1].pic} />
+                }
                 <span className="number">
                     {numberToWord(number)}
                 </span>
@@ -93,6 +113,7 @@ const numberToWord = (num)=>{
 
 function mapStateToProps(state) {
     return{
+        collectionList: state.listReducer.collectionList,
         goodList:　state.listReducer.goodList,
 
         folderId: state.publicReducer.folderId,
@@ -103,6 +124,6 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps, {
-        fetchList, setGoodId
+        fetchList, setFolderId, setGoodId
     }
 )(DetailList);
