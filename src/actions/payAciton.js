@@ -86,7 +86,7 @@ const getCondiDetail =(obj)=>{
             })
             .then( json =>{
                 dispatch(getCondiDetailSuccess(json.data))
-                if( (json.data.fundPrice-json.data.goodsPrice)>=0 && json.data.userId ===cookie.load('userId') ){
+                if( (json.data.fundPrice-json.data.goodsPrice)>=0 && json.data.userId ===cookie.load('userId') && json.data.status===1 ){
                    // location.hash = '#/success';
                     dispatch(showDone(true));
                 }

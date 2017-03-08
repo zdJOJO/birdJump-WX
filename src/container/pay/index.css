@@ -83,10 +83,21 @@
     width: 0.8rem;
     top: 2.7rem;
     transform:rotate(-30deg);
-    /*-ms-transform:rotate(7deg); 	!* IE 9 *!*/
-    /*-moz-transform:rotate(7deg); 	!* Firefox *!*/
-    /*-webkit-transform:rotate(7deg); !* Safari 和 Chrome *!*/
-    /*-o-transform:rotate(7deg);*/
+}
+
+#want .unSuccess{
+    display: block;
+    color: red;
+    font-size: 20px;
+    font-family: 楷体;
+    position: absolute;
+    border: 3px red solid;
+    border-radius: 4px;
+    width: 0.8rem;
+    top: 2.7rem;
+    transform:rotate(-30deg);
+    right: 0.8rem;
+    font-weight: bold;
 }
 
 
@@ -228,6 +239,17 @@
     width: 0.2rem;
     height:  0.2rem;
     position: inherit;
+}
+
+
+#want .code{
+    border: none;
+    width: 0.8rem;
+    height: auto;
+    top: 5.8rem;
+    position: absolute;
+    left: 50%;
+    margin-left: -0.4rem;
 }
 
 

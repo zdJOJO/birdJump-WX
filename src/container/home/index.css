@@ -39,15 +39,15 @@
 }
 
 #card>.panelTwo button{
-    color: rgba(0, 0, 0, 0);
+    color: transparent;
     background: none;
     border: none;
     position: absolute;
-    width: 1.4rem;
-    height: 0.5rem;
-    margin-left: -0.7rem;
+    width: 2rem;
+    height: 1rem;
+    margin-left: -1rem;
     left: 50%;
-    top: 3.65rem;
+    top: 3.4rem;
 }
 
 #home.page2 .panelOne button{
@@ -79,6 +79,17 @@
     left: 50%;
     top: 5.4rem;
 }
+
+
+#home .code{
+    width: 0.8rem;
+    height: auto;
+    top: 5.85rem;
+    position: absolute;
+    left: 50%;
+    margin-left: -0.4rem;
+}
+
 
 
 /*当卡片翻转后，#card需要一个相应的翻转后的样式。*/

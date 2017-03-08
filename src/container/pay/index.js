@@ -82,7 +82,6 @@ class Pay extends Component{
             })
         }else {
             console.log('所选金额：', price)
-            alert('所选金额：' + price)
             fetchOrder({
                 type: 1,
                 data: {

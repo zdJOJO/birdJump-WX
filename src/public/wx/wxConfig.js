@@ -56,7 +56,7 @@ export const wxConfig = (wxParamObj)=>{
                     case 'share' :
                         // wxParamObj.type :  1-首页  2-详情
                         window.wx.onMenuShareTimeline({
-                            title: '铭记过往 珍藏记忆 传递爱心', // 分享标题
+                            title: '我想收藏这件《麻雀》义卖戏服，请帮我！', // 分享标题
                             link: shareUrl, // 分享链接
                             imgUrl: 'http://cfund.oss-cn-hangzhou.aliyuncs.com/f0a44062b190c555a38bc805d5144982.png', // 分享图标
                             success: function () {
@@ -68,8 +68,8 @@ export const wxConfig = (wxParamObj)=>{
                         });
 
                         window.wx.onMenuShareAppMessage({
-                            title: '铭记过往 珍藏记忆 传递爱心', // 分享标题
-                            desc: '【雀跃希望】 电视剧戏服爱心接力义卖', // 分享描述
+                            title: '我想收藏这件《麻雀》义卖戏服，请帮我！', // 分享标题
+                            desc: '【雀跃希望】 铭记过往 珍藏记忆 传递爱心', // 分享描述
                             link: shareUrl, // 分享链接
                             imgUrl: 'http://cfund.oss-cn-hangzhou.aliyuncs.com/f0a44062b190c555a38bc805d5144982.png', // 分享图标
                             type: '', // 分享类型,music、video或link，不填默认为link

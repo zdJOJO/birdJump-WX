@@ -118,7 +118,7 @@ class DetailList extends Component{
                         goodList.map((good,index)=>{
                            return(
                                <li key={index}  onClick={this.handleClick.bind(this,{goodId:good.id, goodPrice: good.price}, good.status)}>
-                                  <img role="presentation" src={good.pic}/>
+                                  <img role="presentation" src={good.logoPic}/>
                                </li>
                            )
                         })

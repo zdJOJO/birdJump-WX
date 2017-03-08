@@ -14,6 +14,7 @@ import {Dialog, Popup} from 'react-weui'
 
 import './index.css'
 import done from '../../img/done.png'
+import code from '../../img/code.png'
 
 class WantToCollect extends Component{
 
@@ -113,8 +114,11 @@ class WantToCollect extends Component{
                     <div className="content">
                         <img className="headPic" role="presentation" src={condiDetail.headPic} />
                         <img className="good" role="presentation" src={condiDetail.goodsModel.pic} />
-                        { condiDetail.goodsPrice-condiDetail.fundPrice<=0 &&
+                        { (condiDetail.goodsPrice-condiDetail.fundPrice<=0 && condiDetail.status===1) &&
                             <img className="success" role="presentation" src={done} />
+                        }
+                        { (condiDetail.goodsPrice-condiDetail.fundPrice<=0 && condiDetail.status===0) &&
+                            <span className="unSuccess">很遗憾,慢了一步</span>
                         }
                         <div className="slide">
                             <div className="barOne" style={{ width: width}}></div>
@@ -154,6 +158,7 @@ class WantToCollect extends Component{
                         })}>我想给他赞助</button>
                         <button className="collect" onClick={this.handleClick.bind(this,2)}>我也想收藏一套</button>
                         <button className="collect2" onClick={this.handleClick.bind(this,2)}>我也想收藏一套</button>
+                        <img  className="code" src={code} role="presentation" />
                     </div>
                 }
             </div>

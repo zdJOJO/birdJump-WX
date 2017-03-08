@@ -52,9 +52,9 @@ class BoxList extends Component{
                         collectionList.map((collection,index)=>{
                             return(
                                 <li key={index} onClick={this.handleClick.bind(this, collection.id, index+1, collection.status)}>
-                                    { collection.startTime > new Date().getTime()/1000 &&
+                                    {/*{ collection.startTime > new Date().getTime()/1000 &&
                                         <span className="mask"/>
-                                    }
+                                    }*/}
                                     <span className="first">掌柜</span>
                                     <img role="presentation" src={collection.pic}/>
                                     <span className="openDate">{timestampFormat(collection.startTime)}</span>

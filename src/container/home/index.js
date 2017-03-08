@@ -7,6 +7,8 @@ import './index.css'
 import {wxConfig} from '../../public/wx/wxConfig'
 import {GetQueryString} from '../../public/index'
 
+import code from '../../img/code.png'
+
 class Home extends Component{
     constructor(props){
         super(props)
@@ -70,6 +72,7 @@ class Home extends Component{
                             <button
                                 onClick={this.handleClick.bind(this, 3)}
                             >我要参加</button>
+                            <img  className="code" src={code} role="presentation" />
                         </div>
                     }
                 </div>
